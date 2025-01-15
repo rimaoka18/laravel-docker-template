@@ -47,7 +47,6 @@ class TodoController extends Controller
   {
     $todo = Todo::find($id);
     return view('todo.edit', ['todo' => $todo]);
-
   }
 
   public function update(TodoRequest $request, $id)
@@ -56,5 +55,12 @@ class TodoController extends Controller
     $todo = $this->todo->find($id);
     $todo->fill($inputs)->save();
     return redirect()->route('todo.show', $todo->id);
+  }
+
+  public function delete($id)
+  {
+    $todo = $this->todo->find($id);
+    $todo->delete();
+    return redirect()->route('todo.index');
   }
 }
